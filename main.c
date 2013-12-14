@@ -21,9 +21,13 @@ int main(void){
 			printf("\nThere is a schedule of today!! Please Check!!\n\n");
 			chk=1;
 		}
+
+
 		printf("\n%s\n", today_above_cmd); /* print today */
 		printf("[Command] "); /* print command prompt */
+
 		my_gets(cmd_str,sizeof(cmd_str)); /* get command string */
+
 		if(iscmd(cmd_str[0])){ /* if cmd_str[0] is command.. */
 			if((cmd_str[0]=='e')&&(cmd_str[1]=='n')&&(cmd_str[2]=='d')&&(cmd_str[3]==0)){/* if command string is "end" */
 				printf("\n\nThanks for using. Bye!\n\n");

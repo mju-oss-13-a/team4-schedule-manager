@@ -22,8 +22,10 @@ int cfr_leap(int val_year){
 				return 1;
 			}
 		}
+		return 0;
 	}
 }
+
 /*** return days of Jan. 1th of inputed year (sun; return 0, mon; return 1, ..., sat; return6)***/
 int ret_day_year(int val_year){
 	int i, day=6; /*** 0001.01.01's day is Saturday. 'day' is its day.***/
@@ -41,6 +43,7 @@ int ret_day_year(int val_year){
 	}
 	return day%7;
 }
+
 /*** return the number of days of inputed month ***/
 int ret_date_no(int val_year, int val_month){
 	if((val_month==1)||(val_month==3)||(val_month==5)||(val_month==7)||(val_month==8)||(val_month==10)||(val_month==12)){
@@ -54,10 +57,15 @@ int ret_date_no(int val_year, int val_month){
 			return 28; /* if val_month is Feb and not leap month, then return 28 */
 		}
 	}
+	else if(val_year == 1752 && val_month ==9)
+	{
+		return 19;
+	}
 	else{
 		return 30; /* other months, return 30 */
 	}
 }
+
 /*** return days of Jan. 1th of inputed year and month ***/
 int ret_day_mon(int val_year, int val_month){
 	int result=0, i;
@@ -67,22 +75,29 @@ int ret_day_mon(int val_year, int val_month){
 	result += ret_day_year(val_year); /*** sum day of Jan. 1th of inputed year ***/
 	return result%7;
 }
+
 /*** Print week of inputed year.inputed month ***/
 void prn_week(int val_year, int val_month, int line_no){
 	int val_days, val_default, i, limit;
 	int first_day_of_month;
 	int tmp[42];
+
 	val_days = ret_date_no(val_year, val_month); /*** the number of date is saved in val_days ***/
+
 	first_day_of_month = ret_day_mon(val_year, val_month); /*** first day of month is saved in
 															 first_day_of_month ***/
+
 	val_default = 1 - first_day_of_month; /*** initial value is saved val_defalut ***/
+
 	for(i=0;i<42;i++){
 		tmp[i] = val_default++; /*** tmp[0] = val_default, tmp[1] = val_default + 1, ...***/
 	}
+
 	for(i=(7*line_no-7), limit=i+6;i<limit+1;i++){
 		prn_date(val_year, val_month, tmp[i]); /*** print date per date ***/
 	}
 }
+
 /*** Print date ***/
 void prn_date(int val_year, int val_month, int val_date){
 	int val_max;
@@ -92,26 +107,40 @@ void prn_date(int val_year, int val_month, int val_date){
 	/***********************************************************/
 	val_max = ret_date_no(val_year, val_month); /*** Max_date is saved in val_max ***/
 	if((val_date>=1)&&(val_date<=val_max)){
-		if(access(&date[0],00)==0){ /*** if file exsists ***/
-			printf("%3d*", val_date);
+		if((val_year == 1752 && val_month == 9) && (val_date > 2))
+		{
+			if(access(&date[0],00)==0){ /*** if file exsists ***/
+			printf("%3d*", val_date+11);
+			}
+			else{ /*** if file doesn't exsist ***/
+
+				printf("%3d ", val_date+11);
+			}
 		}
-		else{ /*** if file doesn't exsist ***/
-			printf("%3d ", val_date);
+		else
+		{
+			if(access(&date[0],00)==0){ /*** if file exsists ***/
+				printf("%3d*", val_date);
+			}
+			else{ /*** if file doesn't exsist ***/
+
+				printf("%3d ", val_date);
+			}
 		}
 	}
 	else{ /*** if n is not values in month ***/
-		printf(" ");
+		printf("    ");
 	}
 }
 /*** Print calender of inputed year ***/
 void prn_cal_year(int val_year){
 	int i, j, val_month=1, k=1;
 	int a, b, c;
-	printf(" %4d\n", val_year);
+	printf(" %43d\n", val_year);
 	for(i=1;i<5;i++){ /*** (print Calender per 3 months line)*3 ***/
-	printf(" %s ", ret_mon_name(k++)); /*** print first month ***/
-	printf(" %s ", ret_mon_name(k++)); /*** print second month ***/
-	printf(" %s \n", ret_mon_name(k++)); /*** print third month ***/
+	printf(" %15s ", ret_mon_name(k++)); /*** print first month ***/
+	printf(" %25s ", ret_mon_name(k++)); /*** print second month ***/
+	printf(" %25s \n", ret_mon_name(k++)); /*** print third month ***/
 	printf(" Sun Mon Tue Wed Thu Fri Sat ");
 	printf(" Sun Mon Tue Wed Thu Fri Sat ");
 	printf(" Sun Mon Tue Wed Thu Fri Sat ");
@@ -129,6 +158,7 @@ void prn_cal_year(int val_year){
 	putchar('\n');
 }
 }
+
 /*** Print calender of inputed month in inputed year ***/
 void prn_cal_month(int val_year, int val_month){
 	int i;
@@ -142,6 +172,7 @@ void prn_cal_month(int val_year, int val_month){
 	}
 	putchar('\n');
 }
+
 /*** Return month name ***/
 char *ret_mon_name(int val_month){
 	switch(val_month){

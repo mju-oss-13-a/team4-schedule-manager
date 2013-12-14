@@ -24,16 +24,21 @@ void CMD_edit(char *date){
 	printf("\n\nSchdule is edited successfully!!\n\n");
 	fclose(ofp);
 }
+
+
+
 /*** Delete schedule ***/
 void CMD_del(char *date){
 	TEMP_CHAR_VARIABLES c;
+
 	printf("[Delete : %s]\n", date);
 	if(access(&date[0],00)!=0){ /*** If there is not a file, print error massage! ***/
 		printf("There is not exist schedule!!\n");
 		return;
 	}
-	printf("\n%s schedule will be removed! Are you OK? [Y/N]", date); /*** confirm that really ***/
 
+	getchar();
+	printf("\n%s schedule will be removed! Are you OK? [Y/N]", date); /*** confirm that really ***/
 	scanf("%c", &c);
 	if((c=='Y')||(c=='y')){
 		remove(date);
@@ -46,6 +51,8 @@ void CMD_del(char *date){
 		return ;
 	}
 }
+
+
 /*** Command that view schdule ***/
 void CMD_view(char *date1, char *date2){
 	ELEMENTS_OF_DATE val1y, val1m, val1d, /* Initial date element */
@@ -67,13 +74,16 @@ void CMD_view(char *date1, char *date2){
 	else if(val1s==val2s){ /* if date1 equivalences to date2 */
 		mode = 1;
 	}
+
 	else if(val1s<val2s){ /*if date1 is before date2 */
 		sum = cnt_date(val1y, val1m, val1d, val2y, val2m, val2d); /* call cnt_date() */
 		mode = 2;
 	}
+
 	if(access(&date[0],00)!=0){ /*** If there is not a file, print error massage ***/
 		return;
 	}
+
 {
 	ifp = fopen(&date[0], "r"); /* open file */
 	putchar('\n');
@@ -95,7 +105,10 @@ void CMD_view(char *date1, char *date2){
 	putchar('\n');
 	fclose(ifp);
 }
+
 }
+
+
 /*** Search Schedule ***/
 void CMD_src(void){
 	VARIABLES_FOR_ARRAY str[50]={0}, /* range for searching */
@@ -107,6 +120,8 @@ void CMD_src(void){
 	my_gets(str,sizeof(str)); /* input range */
 	src(&str[0], &word[0]); /* call src() */
 }
+
+
 /*** Print help page ***/
 void CMD_help(void){
 	printf("\n\n\n+-------------------------------------------------------+\n");

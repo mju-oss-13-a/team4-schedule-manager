@@ -6,6 +6,8 @@ int iscmd(char c){
 	else
 		return 0;
 }
+
+
 /*** Count dates from intial year to last year ***/
 int cnt_date(int ini_year, int ini_month, int ini_date, int end_year, int end_month, int end_date){
 	int sum = 0, i;
@@ -43,6 +45,8 @@ int cnt_date(int ini_year, int ini_month, int ini_date, int end_year, int end_mo
 	}
 	return sum;
 }
+
+
 char *my_gets(char *s, size_t size)
 {
 	int len;

@@ -4,7 +4,8 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
-#include <unistd.h>
+#include <io.h>
+//#include <unistd.h>
 /*** Type definitions **************************************************/
 typedef int ELEMENTS_OF_DATE;
 typedef int TEMP_INT_VARIABLES;
