@@ -1,5 +1,6 @@
 #include "sm_head.h"
 int main(void){
+	char data[100];
 	CMD_help(); /* Print help page on screen */
 	while(1){
 		ELEMENTS_OF_DATE val_year = 0, val_month = 0, val_date = 0; /* variables of inputed
@@ -23,7 +24,8 @@ int main(void){
 		}
 		printf("\n%s\n", today_above_cmd); /* print today */
 		printf("[Command] "); /* print command prompt */
-		my_gets(cmd_str,sizeof(cmd_str)); /* get command string */
+		fgets(data,sizeof(cmd_str),stdin); /* get command string */
+		getchar();
 		if(iscmd(cmd_str[0])){ /* if cmd_str[0] is command.. */
 			if((cmd_str[0]=='e')&&(cmd_str[1]=='n')&&(cmd_str[2]=='d')&&(cmd_str[3]==0)){/* if command string is "end" */
 				printf("\n\nThanks for using. Bye!\n\n");

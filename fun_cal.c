@@ -1,4 +1,4 @@
-﻿#include "sm_head.h"
+#include "sm_head.h"
 /*** if inputed year is leap year, then return 1 ***/
 int cfr_leap(int val_year){
 	/*** before 1800, all Feb month has 29 days. ***/
@@ -43,9 +43,8 @@ int ret_day_year(int val_year){
 }
 /*** return the number of days of inputed month ***/
 int ret_date_no(int val_year, int val_month){
-	if((val_month==1)||(val_month==3)||(val_month==5)||(val_month==7)||(val_month==8)||(val_month==10)|
-		|(val_month==12)){
-			return 31;
+	if((val_month==1)||(val_month==3)||(val_month==5)||(val_month==7)||(val_month==8)||(val_month==10)||(val_month==12)){
+		return 31;
 	} /* if val_month is 1, 3, 5, 7, 8, 10 or 12, then return 31 */
 	else if(val_month==2){
 		if(cfr_leap(val_year)==1){
@@ -75,7 +74,7 @@ void prn_week(int val_year, int val_month, int line_no){
 	int tmp[42];
 	val_days = ret_date_no(val_year, val_month); /*** the number of date is saved in val_days ***/
 	first_day_of_month = ret_day_mon(val_year, val_month); /*** first day of month is saved in
-														   first_day_of_month ***/
+															 first_day_of_month ***/
 	val_default = 1 - first_day_of_month; /*** initial value is saved val_defalut ***/
 	for(i=0;i<42;i++){
 		tmp[i] = val_default++; /*** tmp[0] = val_default, tmp[1] = val_default + 1, ...***/
@@ -108,55 +107,55 @@ void prn_date(int val_year, int val_month, int val_date){
 void prn_cal_year(int val_year){
 	int i, j, val_month=1, k=1;
 	int a, b, c;
-	printf(" %4d₩n", val_year);
+	printf(" %4d\n", val_year);
 	for(i=1;i<5;i++){ /*** (print Calender per 3 months line)*3 ***/
-		printf(" %s ", ret_mon_name(k++)); /*** print first month ***/
-		printf(" %s ", ret_mon_name(k++)); /*** print second month ***/
-		printf(" %s ₩n", ret_mon_name(k++)); /*** print third month ***/
-		printf(" Sun Mon Tue Wed Thu Fri Sat ");
-		printf(" Sun Mon Tue Wed Thu Fri Sat ");
-		printf(" Sun Mon Tue Wed Thu Fri Sat ");
-		putchar('₩n');
-		for(j=1, a=val_month++, b=val_month++, c=val_month++;j<7;j++){ /*** print calender 1st week to
-																	   6th week ***/
-			printf(" ");
-			prn_week(val_year, a, j);
-			printf(" ");
-			prn_week(val_year, b, j);
-			printf(" ");
-			prn_week(val_year, c, j);
-			putchar('₩n');
-		}
-		putchar('₩n');
+	printf(" %s ", ret_mon_name(k++)); /*** print first month ***/
+	printf(" %s ", ret_mon_name(k++)); /*** print second month ***/
+	printf(" %s \n", ret_mon_name(k++)); /*** print third month ***/
+	printf(" Sun Mon Tue Wed Thu Fri Sat ");
+	printf(" Sun Mon Tue Wed Thu Fri Sat ");
+	printf(" Sun Mon Tue Wed Thu Fri Sat ");
+	putchar('\n');
+	for(j=1, a=val_month++, b=val_month++, c=val_month++;j<7;j++){ /*** print calender 1st week to
+																	 6th week ***/
+		printf(" ");
+		prn_week(val_year, a, j);
+		printf(" ");
+		prn_week(val_year, b, j);
+		printf(" ");
+		prn_week(val_year, c, j);
+		putchar('\n');
 	}
+	putchar('\n');
+}
 }
 /*** Print calender of inputed month in inputed year ***/
 void prn_cal_month(int val_year, int val_month){
 	int i;
-	printf(" %4d %s ₩n", val_year, ret_mon_name(val_month)); /*** print year and month
-															 ***/
-	printf(" Sun Mon Tue Wed Thu Fri Sat ₩n");
+	printf(" %4d %s \n", val_year, ret_mon_name(val_month)); /*** print year and month
+															   ***/
+	printf(" Sun Mon Tue Wed Thu Fri Sat \n");
 	for(i=1;i<7;i++){ /*** print calender 1st week to 6th week ***/
 		putchar(' ');
 		prn_week(val_year, val_month, i);
-		putchar('₩n');
+		putchar('\n');
 	}
-	putchar('₩n');
+	putchar('\n');
 }
 /*** Return month name ***/
 char *ret_mon_name(int val_month){
 	switch(val_month){
-	case 1:return "Jan";
-	case 2:return "Feb";
-	case 3:return "Mar";
-	case 4:return "Apr";
-	case 5:return "May";
-	case 6:return "Jun";
-	case 7:return "Jul";
-	case 8:return "Aug";
-	case 9:return "Sep";
-	case 10:return "Oct";
-	case 11:return "Nov";
-	case 12:return "Sep";
+		case 1:return "Jan";
+		case 2:return "Feb";
+		case 3:return "Mar";
+		case 4:return "Apr";
+		case 5:return "May";
+		case 6:return "Jun";
+		case 7:return "Jul";
+		case 8:return "Aug";
+		case 9:return "Sep";
+		case 10:return "Oct";
+		case 11:return "Nov";
+		case 12:return "Dec";
 	}
 }

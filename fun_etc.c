@@ -19,11 +19,11 @@ int cnt_date(int ini_year, int ini_month, int ini_date, int end_year, int end_mo
 			}
 		}
 		for(i=ini_month+1;i<13;i++){ /* add date of the month that inside range from initial month to end
-									 month of the initial year*/
+										month of the initial year*/
 			sum += ret_date_no(ini_year, i);
 		}
 		for(i=1;i<end_month;i++){ /* add date of the month that inside range from end month to end
-								  month of the end year*/
+									 month of the end year*/
 			sum += ret_date_no(end_year, i);
 		}
 		sum += ret_date_no(ini_year, ini_month) - ini_date; /* add dates */
@@ -32,15 +32,23 @@ int cnt_date(int ini_year, int ini_month, int ini_date, int end_year, int end_mo
 	else if(ini_year==end_year){ /* if initial year equivalences to end year */
 		if(ini_month!=end_month){ /* if initial month does not equivalences to end month */
 			for(i=ini_month+1;i<end_month;i++){ /* add date of the month from initial month to end month
-												*/
+												 */
 				sum += ret_date_no(ini_year, i);
 			}
 			sum += ret_date_no(ini_year, ini_month) - ini_date; /* add dates */
 			sum += end_date; /* add dates */
 		}
 		else{
-			sum += end_date - ini_date;
-		}
+			sum += end_date - ini_date;		}
 	}
 	return sum;
+}
+char *my_gets(char *s, size_t size)
+{
+	int len;
+	fgets(s, size, stdin);
+	len = strlen(s);
+	if (s[len - 1] == '\n')
+		s[len - 1] = '\0';
+	return s;
 }

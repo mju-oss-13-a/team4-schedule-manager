@@ -1,10 +1,10 @@
-/*** Header Files ******************************************************/
+/*** Header Files *****************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include <unistd.h>
 #include <ctype.h>
+#include <unistd.h>
 /*** Type definitions **************************************************/
 typedef int ELEMENTS_OF_DATE;
 typedef int TEMP_INT_VARIABLES;
@@ -31,4 +31,5 @@ void CMD_src(void); // Seach the schedule.
 void CMD_view(char*, char*); // View schedule.
 void src(char*, char*); // Search schedule fucntion.
 char *ret_mon_name(int); // Return name of month.
+char *my_gets(char *s, size_t size);
 /***********************************************************************/

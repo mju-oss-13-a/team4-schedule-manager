@@ -1,0 +1,2 @@
+컴파일 할때는 g++ -Wno-write-strings fun_cal.c fun_src.c fun_etc.c fun_cmd.c main.c
+로 만들면 되용
